@@ -1,5 +1,5 @@
-import React, { Component, PureComponent } from 'react'
-import { AutoSizer, Column, Table, SortDirection, SortIndicator } from 'react-virtualized';
+import React, { PureComponent } from 'react'
+import { AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
 import Draggable from "react-draggable";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown, faSortUp, faSort } from '@fortawesome/free-solid-svg-icons';
@@ -7,8 +7,8 @@ import VisDataTableControl from './VisDataTableControl/VisDataTableControl';
 import arrayMove from 'array-move';
 import './VisDataTable.css';
 export default class VisDataTable extends PureComponent {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     const fWidth = 1 / this.props.fields.length;
     const fields = this.props.fields.map(f => { return { ...f, width: fWidth, isShow: true } })
     this.state = {
@@ -42,9 +42,10 @@ export default class VisDataTable extends PureComponent {
   cellRenderer(d, f) {
     let urlElt;
     if(f.link&&f.link.url&&f.link.field){
-      urlElt = <a href={f.link.url + d.rowData[f.link.field]}>{d.cellData}</a>
+      let urlbase = f.link.url || "";
+      urlElt = <a target="_parent" href={urlbase + d.rowData[f.link.field]}>{d.cellData}</a>
     }else if(f.link&&f.link.url){
-      urlElt = <a href={f.link.url}>{d.cellData}</a>
+      urlElt = <a target="_parent" href={f.link.url}>{d.cellData}</a>
     } else{
       urlElt = d.cellData
     }
