@@ -9,7 +9,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import './style/main.scss';
-import 'react-virtualized/styles.css';
+//import 'react-virtualized/styles.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

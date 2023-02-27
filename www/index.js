@@ -1,0 +1,1 @@
+module.exports = '<!DOCTYPE html>\n<html>\n  <meta charset="utf-8" />\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1, shrink-to-fit=no"\n  />\n  <link rel="shortcut icon" href="./favicon.ico" />\n  <title>EagleScope</title>\n  <body>\n    <div id="root"></div>\n    <script type="module" src="./index.js"><\/script>\n  </body>\n</html>\n';

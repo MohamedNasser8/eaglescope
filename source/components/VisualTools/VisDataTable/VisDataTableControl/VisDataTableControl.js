@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { sortableContainer } from 'react-sortable-hoc';
+//import { sortableContainer } from 'react-sortable-hoc';
+import {DndContext} from '@dnd-kit/core';
+import {SortableContext} from '@dnd-kit/sortable';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,25 +47,27 @@ export default class VisDataTableControl extends PureComponent {
           </Button>
         </Popover.Title>
         <Popover.Content>
-          <SortableContainer
-            onSortEnd={({ oldIndex, newIndex }) => {
-              document.body.style.cursor = 'default';
-              this.props.onSortEnd({ oldIndex, newIndex });
-            }}
-            onSortStart={() => {
-              document.body.style.cursor = 'grabbing';
-            }}
-            useDragHandle
-          >
-            {this.props.list.map((item, index) => (
-              <VisSortableItem
-                key={`item-${item.dataKey}`}
-                {...item}
-                index={index}
-                onCheckChanged={this.props.onCheckChanged}
-              />
-            ))}
-          </SortableContainer>
+          <DndContext>
+            <SortableContext
+              onSortEnd={({ oldIndex, newIndex }) => {
+                document.body.style.cursor = 'default';
+                this.props.onSortEnd({ oldIndex, newIndex });
+              }}
+              onSortStart={() => {
+                document.body.style.cursor = 'grabbing';
+              }}
+              useDragHandle
+            >
+              {this.props.list.map((item, index) => (
+                <VisSortableItem
+                  key={`item-${item.dataKey}`}
+                  {...item}
+                  index={index}
+                  onCheckChanged={this.props.onCheckChanged}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
         </Popover.Content>
       </Popover>
     );
